@@ -14,6 +14,10 @@
     "@expo-google-fonts/inter": "^0.4.1",
     "@expo-google-fonts/roboto": "^0.4.0",
     "@fontsource/inter": "^5.2.6",
+    "@react-navigation/bottom-tabs": "^7.4.7",
+    "@react-navigation/native": "^7.1.17",
+    "@react-navigation/native-stack": "^7.3.26",
+    "@react-navigation/stack": "^7.4.8",
     "expo": "^53.0.22",
     "expo-font": "~13.3.2",
     "expo-status-bar": "~2.2.3",
@@ -22,11 +26,12 @@
     "nativewind": "^4.1.23",
     "react": "19.0.0",
     "react-native": "0.79.5",
-    "react-native-date-picker": "^5.0.13",
     "react-native-paper": "^5.14.5",
     "react-native-reanimated": "~3.17.4",
-    "react-native-safe-area-context": "^5.4.0",
-    "tailwindcss-font-inter": "^4.0.0"
+    "react-native-safe-area-context": "5.4.0",
+    "react-native-screens": "~4.11.1",
+    "tailwindcss-font-inter": "^4.0.0",
+    "@react-native-community/datetimepicker": "8.4.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

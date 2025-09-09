@@ -1,9 +1,10 @@
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import './global.css';
-import BillsScreen from '~/screens/BillsScreen';
 import { useFonts } from 'expo-font';
 import { Inter_400Regular, Inter_500Medium, Inter_600SemiBold, Inter_700Bold } from '@expo-google-fonts/inter';
 import { Provider as PaperProvider } from 'react-native-paper';
+import { StatusBar } from 'expo-status-bar';
+import Router from '~/routes/Router';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -20,7 +21,8 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <PaperProvider>
-        <BillsScreen />
+        <StatusBar backgroundColor='black'/>
+        <Router />
       </PaperProvider>
     </SafeAreaProvider>
   );
