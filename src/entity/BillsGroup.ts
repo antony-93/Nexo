@@ -1,6 +1,6 @@
 export default class BillsGroup {
     constructor(
-        private id: string,
+        public id: string,
         public name: string
     ) {}
 }

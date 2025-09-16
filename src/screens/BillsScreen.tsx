@@ -72,7 +72,7 @@ export default function BillsScreen() {
                 >
                     <MenuItem
                         title="Adicionar conta"
-                        onPress={() => navigation.navigate('CreateBill')}
+                        onPress={() => navigation.navigate('CreateBillsRouter')}
                     />
                 </Menu>
             </View>

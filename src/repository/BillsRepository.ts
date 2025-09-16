@@ -2,7 +2,7 @@ import Bill from "@/entity/Bill";
 import { addDoc, collection, DocumentReference } from "firebase/firestore";
 import { db } from "FirebaseConfig";
 
-export default class BillsRepository {
+export default class BillsRepository implements BillsRepository {
     async insertBills(bills: Omit<Bill, 'id'>[]): Promise<string[]> {
         const docRefPromises: Promise<DocumentReference>[] = [];
 

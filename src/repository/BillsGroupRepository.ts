@@ -9,11 +9,18 @@ export default class BillsGroupRepository {
     }
 
     async list(): Promise<BillsGroup[]> {
-        const docsRef = await getDocs(this.getCollection());
-        
-        if (docsRef.empty) return [];
-        
-        return docsRef.docs.map(doc => doc.data() as BillsGroup);
+        try {
+            console.log('AQUI')
+            const docsRef = await getDocs(this.getCollection());
+            
+            console.log('AQUI', docsRef)
+    
+            if (docsRef.empty) return [];
+            
+            return docsRef.docs.map(doc => doc.data() as BillsGroup);
+        } catch (error) {
+            return []
+        }
     }
 
     private getCollection() {
