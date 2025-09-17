@@ -1,5 +1,5 @@
 import BillsGroup from "@/entity/BillsGroup";
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import { addDoc, collection, getDocs, QueryDocumentSnapshot } from "firebase/firestore";
 import { db } from "FirebaseConfig";
 
 export default class BillsGroupRepository {
@@ -10,17 +10,21 @@ export default class BillsGroupRepository {
 
     async list(): Promise<BillsGroup[]> {
         try {
-            console.log('AQUI')
             const docsRef = await getDocs(this.getCollection());
-            
-            console.log('AQUI', docsRef)
-    
+
             if (docsRef.empty) return [];
             
-            return docsRef.docs.map(doc => doc.data() as BillsGroup);
+            return docsRef.docs.map(this.docToBillsGroupEntity);
         } catch (error) {
             return []
         }
+    }
+
+    private docToBillsGroupEntity(doc: QueryDocumentSnapshot): BillsGroup {
+        return new BillsGroup(
+            doc.id, 
+            doc.data().name
+        );
     }
 
     private getCollection() {

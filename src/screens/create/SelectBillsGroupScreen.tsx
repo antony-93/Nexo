@@ -1,20 +1,20 @@
 import { useCreateBillsDto } from "@/context/CreateBillsDtoContext";
 import { useBillsGroupQuery } from "@/hooks/UseBillsGroup";
-import { useCallback } from "react";
+import { useNavigation } from "@react-navigation/native";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function SelectBillsGroupScreen() {
     const { data = [] } = useBillsGroupQuery();
 
-    const { 
-        createBillsDto,
-        setBillsGroupId 
-    } = useCreateBillsDto();
+    const { setBillsGroupId } = useCreateBillsDto();
     
-    const handleSelectBillsGroupId = useCallback((billsGroupId: string) => {
+    const navigation = useNavigation<any>();
+
+    const handleSelectBillsGroupId = (billsGroupId: string) => {
         setBillsGroupId(billsGroupId);
-    }, [createBillsDto])
+        navigation.navigate('BillsFormScreen')
+    }
 
     return (
         <SafeAreaView className="flex-1 bg-background dark:bg-background-dark px-6 py-2">
@@ -30,7 +30,7 @@ export default function SelectBillsGroupScreen() {
                         <TouchableOpacity 
                             onPress={() => handleSelectBillsGroupId(bg.id)}
                             className="border-b-[1px] border-gray-100 px-2 py-5" 
-                            id={bg.id}
+                            key={bg.id}
                         >
                             <Text className="text-xl ml-2 text-text dark:text-text-dark">
                                 {bg.name}

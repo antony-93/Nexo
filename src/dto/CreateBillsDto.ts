@@ -2,8 +2,8 @@ export default class CreateBillsDto {
     constructor(
         public billsGroupId: string = '',
         public name: string = '',
-        public value: string = '',
+        public value: number = 0,
         public startsIn: Date = new Date(),
-        public installments = 1
+        public installments: number = 1
     ) {}
 }
