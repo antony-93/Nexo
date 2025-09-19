@@ -1,7 +1,9 @@
-import { DateInput, DecimalInput, InputWrapper, NumberInput, TextInput } from "@/components/inputs";
+import DateField from "@/components/fields/DateField";
+import DecimalField from "@/components/fields/DecimalField";
+import NumberField from "@/components/fields/NumberField";
+import TextField from "@/components/fields/TextField";
 import { useCreateBillsDto } from "@/context/CreateBillsDtoContext";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Calendar, DollarSign, FileText, Hash } from "lucide-react-native";
 import { Controller, useForm } from "react-hook-form";
 import { Keyboard, KeyboardAvoidingView, Platform, Text, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -33,10 +35,8 @@ export default function BillsFormScreen() {
     } = useForm({
         resolver: zodResolver(createBillsSchema),
         defaultValues: {
-            name: '',
             value: 0,
-            startsIn: new Date(),
-            installments: 1
+            startsIn: new Date()
         },
         mode: 'onChange'
     });
@@ -71,18 +71,13 @@ export default function BillsFormScreen() {
                                 control={control}
                                 name="name"
                                 render={({ field, fieldState: { error } }) => (
-                                    <InputWrapper
-                                        label="Nome da conta"
-                                        icon={<FileText size={20} color="#6B7280" />}
-                                    >
-                                        <TextInput
-                                            value={field.value}
-                                            onChange={field.onChange}
-                                            onBlur={field.onBlur}
-                                            error={error?.message || null}
-                                            placeholder="Digite o nome da conta"
-                                        />
-                                    </InputWrapper>
+                                    <TextField
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                        onBlur={field.onBlur}
+                                        error={error?.message || null}
+                                        placeholder="Digite o nome da conta"
+                                    />
                                 )}
                             />
 
@@ -90,18 +85,12 @@ export default function BillsFormScreen() {
                                 control={control}
                                 name="value"
                                 render={({ field, fieldState: { error } }) => (
-                                    <InputWrapper
-                                        label="Valor"
-                                        icon={<DollarSign size={20} color="#6B7280" />}
-                                    >
-                                        <DecimalInput
-                                            value={field.value}
-                                            onChange={field.onChange}
-                                            onBlur={field.onBlur}
-                                            error={error?.message || null}
-                                            placeholder="R$ 0,00"
-                                        />
-                                    </InputWrapper>
+                                    <DecimalField
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                        onBlur={field.onBlur}
+                                        error={error?.message || null}
+                                    />
                                 )}
                             />
 
@@ -109,18 +98,13 @@ export default function BillsFormScreen() {
                                 control={control}
                                 name="installments"
                                 render={({ field, fieldState: { error } }) => (
-                                    <InputWrapper
-                                        label="Número de parcelas"
-                                        icon={<Hash size={20} color="#6B7280" />}
-                                    >
-                                        <NumberInput
-                                            value={field.value}
-                                            onChange={field.onChange}
-                                            onBlur={field.onBlur}
-                                            error={error?.message || null}
-                                            placeholder="Ex: 12"
-                                        />
-                                    </InputWrapper>
+                                    <NumberField
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                        onBlur={field.onBlur}
+                                        error={error?.message || null}
+                                        placeholder="Digite a quantidade de parcelas"
+                                    />
                                 )}
                             />
 
@@ -128,18 +112,12 @@ export default function BillsFormScreen() {
                                 control={control}
                                 name="startsIn"
                                 render={({ field, fieldState: { error } }) => (
-                                    <InputWrapper
-                                        label="Data de início"
-                                        icon={<Calendar size={20} color="#6B7280" />}
-                                    >
-                                        <DateInput
-                                            value={field.value}
-                                            onChange={field.onChange}
-                                            onBlur={field.onBlur}
-                                            error={error?.message || null}
-                                            placeholder="mm/yyyy"
-                                        />
-                                    </InputWrapper>
+                                    <DateField
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                        onBlur={field.onBlur}
+                                        error={error?.message || null}
+                                    />
                                 )}
                             />
                         </View>
