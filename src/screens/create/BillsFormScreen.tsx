@@ -2,46 +2,33 @@ import DateField from "@/components/fields/DateField";
 import DecimalField from "@/components/fields/DecimalField";
 import NumberField from "@/components/fields/NumberField";
 import TextField from "@/components/fields/TextField";
-import { useCreateBillsDto } from "@/context/CreateBillsDtoContext";
+import { useCreateBillsSchema } from "@/context/CreateBillsSchemaContext";
+import { CreateBillsSchema, createBillsSchema } from "@/schemas/CreateBillsSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useNavigation } from "@react-navigation/native";
 import { Controller, useForm } from "react-hook-form";
 import { Keyboard, KeyboardAvoidingView, Platform, Text, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { z } from "zod";
-
-const createBillsSchema = z.object({
-    name: z.string().min(1, 'Nome é obrigatório').max(100, 'Nome deve ter no máximo 100 caracteres'),
-    value: z.number().min(0.01, 'Valor deve ser maior que zero'),
-    startsIn: z.date({
-        message: 'Data de início é obrigatória',
-    }),
-    installments: z.number().min(1, 'Deve ter pelo menos 1 parcela')
-});
-
-type CreateBillsFormData = z.infer<typeof createBillsSchema>;
 
 export default function BillsFormScreen() {
     const {
+        createBillsSchema: createBillsSchemaObject,
         setDetails
-    } = useCreateBillsDto();
+    } = useCreateBillsSchema();
 
     const {
         control,
         handleSubmit,
-        formState: {
-            isValid
-        },
         reset
     } = useForm({
         resolver: zodResolver(createBillsSchema),
-        defaultValues: {
-            value: 0,
-            startsIn: new Date()
-        },
-        mode: 'onChange'
+        defaultValues: createBillsSchemaObject,
+        mode: 'onSubmit'
     });
 
-    const onSubmit = async (data: CreateBillsFormData) => {
+    const navigation = useNavigation<any>();
+
+    const onSubmit = async (data: CreateBillsSchema) => {
         setDetails({
             name: data.name,
             value: data.value,
@@ -49,7 +36,7 @@ export default function BillsFormScreen() {
             installments: data.installments
         });
 
-        reset();
+        navigation.navigate('BillsToCreateListScreen')
     };
 
     return (
@@ -60,9 +47,9 @@ export default function BillsFormScreen() {
             >
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                     <View className="flex-1 px-6 py-2">
-                        <View className="flex flex-col mb-8">
-                            <Text className="text-3xl font-semibold ml-2 text-text dark:text-text-dark">
-                                Criar Nova Conta
+                        <View className="flex flex-col mb-4">
+                            <Text className="text-3xl font-semibold text-text dark:text-text-dark">
+                                Criar nova conta
                             </Text>
                         </View>
 
@@ -73,6 +60,7 @@ export default function BillsFormScreen() {
                                 render={({ field, fieldState: { error } }) => (
                                     <TextField
                                         value={field.value}
+                                        label="Nome da conta"
                                         onChange={field.onChange}
                                         onBlur={field.onBlur}
                                         error={error?.message || null}
@@ -86,6 +74,7 @@ export default function BillsFormScreen() {
                                 name="value"
                                 render={({ field, fieldState: { error } }) => (
                                     <DecimalField
+                                        label="Valor"
                                         value={field.value}
                                         onChange={field.onChange}
                                         onBlur={field.onBlur}
@@ -99,11 +88,11 @@ export default function BillsFormScreen() {
                                 name="installments"
                                 render={({ field, fieldState: { error } }) => (
                                     <NumberField
+                                        label="Parcelas"
                                         value={field.value}
                                         onChange={field.onChange}
                                         onBlur={field.onBlur}
                                         error={error?.message || null}
-                                        placeholder="Digite a quantidade de parcelas"
                                     />
                                 )}
                             />
@@ -113,6 +102,7 @@ export default function BillsFormScreen() {
                                 name="startsIn"
                                 render={({ field, fieldState: { error } }) => (
                                     <DateField
+                                        label="Começa em"
                                         value={field.value}
                                         onChange={field.onChange}
                                         onBlur={field.onBlur}
@@ -125,10 +115,9 @@ export default function BillsFormScreen() {
                         <TouchableOpacity
                             className="py-4 px-8 rounded-xl mt-8 bg-primary dark:bg-primary-dark"
                             onPress={handleSubmit(onSubmit)}
-                            disabled={!isValid}
                         >
                             <Text className="text-white text-lg font-semibold text-center">
-                                Criar Conta
+                                Próximo
                             </Text>
                         </TouchableOpacity>
                     </View>

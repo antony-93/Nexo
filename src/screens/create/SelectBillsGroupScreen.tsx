@@ -1,4 +1,4 @@
-import { useCreateBillsDto } from "@/context/CreateBillsDtoContext";
+import { useCreateBillsSchema } from "@/context/CreateBillsSchemaContext";
 import { useBillsGroupQuery } from "@/hooks/UseBillsGroup";
 import { useNavigation } from "@react-navigation/native";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
@@ -7,7 +7,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function SelectBillsGroupScreen() {
     const { data = [] } = useBillsGroupQuery();
 
-    const { setBillsGroupId } = useCreateBillsDto();
+    const { setBillsGroupId } = useCreateBillsSchema();
     
     const navigation = useNavigation<any>();
 
@@ -19,7 +19,7 @@ export default function SelectBillsGroupScreen() {
     return (
         <SafeAreaView className="flex-1 bg-background dark:bg-background-dark px-6 py-2">
             <View className="flex flex-col mb-2">
-                <Text className="text-3xl font-semibold ml-2 text-text dark:text-text-dark">
+                <Text className="text-3xl font-semibold text-text dark:text-text-dark">
                     Selecione o grupo de contas
                 </Text>
             </View>

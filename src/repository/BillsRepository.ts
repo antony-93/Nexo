@@ -1,20 +1,30 @@
+import { CreateBillDto } from "@/dto/CreateBillDto";
 import Bill from "@/entity/Bill";
+import IBillsRepository from "@/interface/BillsRepositoryInterface";
 import { addDoc, collection, DocumentReference } from "firebase/firestore";
 import { db } from "FirebaseConfig";
 
-export default class BillsRepository implements BillsRepository {
-    async insertBills(bills: Omit<Bill, 'id'>[]): Promise<string[]> {
-        const docRefPromises: Promise<DocumentReference>[] = [];
+export default class BillsRepository implements IBillsRepository {
+    async insertBills(bills: CreateBillDto[]): Promise<string[]> {
+        try {
+            const docRefPromises: Promise<DocumentReference>[] = [];
 
-        for (const bill of bills) {
-            docRefPromises.push(
-                addDoc(this.getCollection(), bill)
-            );
+            console.log(bills)
+
+            for (const bill of bills) {
+                console.log(bill)
+                docRefPromises.push(
+                    addDoc(this.getCollection(), bill)
+                );
+            }
+
+            const docRefs = await Promise.all(docRefPromises);
+
+            return docRefs.map(docRef => docRef.id);
+        } catch (error) {
+            console.log(error)
+            return []
         }
-
-        const docRefs = await Promise.all(docRefPromises);
-
-        return docRefs.map(docRef => docRef.id);
     }
 
     async list(): Promise<Bill[]> {
