@@ -1,6 +1,8 @@
+import { Card } from "@/components/ui/Card";
 import { useCreateBillsSchema } from "@/context/CreateBillsSchemaContext";
 import { useBillsGroupQuery } from "@/hooks/UseBillsGroup";
 import { useNavigation } from "@react-navigation/native";
+import { Wallet } from "lucide-react-native";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -8,7 +10,7 @@ export default function SelectBillsGroupScreen() {
     const { data = [] } = useBillsGroupQuery();
 
     const { setBillsGroupId } = useCreateBillsSchema();
-    
+
     const navigation = useNavigation<any>();
 
     const handleSelectBillsGroupId = (billsGroupId: string) => {
@@ -17,27 +19,40 @@ export default function SelectBillsGroupScreen() {
     }
 
     return (
-        <SafeAreaView className="flex-1 bg-background dark:bg-background-dark px-6 py-2">
-            <View className="flex flex-col mb-2">
-                <Text className="text-3xl font-semibold text-text dark:text-text-dark">
-                    Selecione o grupo de contas
+        <SafeAreaView className="flex-1 px-6 bg-primary">
+            <View className="mb-4">
+                <Text className="text-3xl mb-1 font-bold text-primary">
+                    Selecionar grupo de contas
+                </Text>
+
+                <Text className="text-secondary">
+                    Selecione um grupo de contas para sua nova conta
                 </Text>
             </View>
 
-            <ScrollView showsVerticalScrollIndicator={false}>
-                {
-                    data.map(bg => (
-                        <TouchableOpacity 
-                            onPress={() => handleSelectBillsGroupId(bg.id)}
-                            className="border-b-[1px] border-gray-100 px-2 py-5" 
-                            key={bg.id}
-                        >
-                            <Text className="text-xl ml-2 text-text dark:text-text-dark">
+            <ScrollView
+                showsVerticalScrollIndicator={false}
+                bounces={false}
+                contentContainerClassName="gap-4"
+            >
+                {data.map(bg => (
+                    <TouchableOpacity
+                        onPress={() => handleSelectBillsGroupId(bg.id)}
+                        key={bg.id}
+                    >
+                        <Card key={bg.id} className="flex-row items-center gap-4">
+                            <View
+                                className="bg-action-secondary p-1.5 rounded-md border-action-primary border-[1px]"
+                            >
+                                <Wallet size={20} color="#6B4EFF" />
+                            </View>
+
+                            <Text className="flex-1 font-medium">
                                 {bg.name}
                             </Text>
-                        </TouchableOpacity>
-                    ))
-                }
+                        </Card>
+                    </TouchableOpacity>
+                ))}
             </ScrollView>
         </SafeAreaView>
     );

@@ -17,8 +17,10 @@ export function Field({
 }: TField) {
     const clsField = useMemo(() => {
         const defaultClsField: string = `
-            border border-gray-300 dark:border-gray-600 
-            rounded-xl bg-white dark:bg-gray-800 flex justify-center
+            bg-secondary
+            border border-primary
+            rounded-lg
+            shadow-card
         `;
 
         return cn(
@@ -31,7 +33,7 @@ export function Field({
     return (
         <View className={className}>
             {label && (
-                <Text className="text-lg text-text dark:text-text-dark mb-2 font-medium">
+                <Text className="text-lg text-primary mb-2 font-medium">
                     {label}
                 </Text>
             )}

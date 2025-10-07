@@ -1,6 +1,6 @@
 import { Children, cloneElement, ReactElement, ReactNode, useState } from "react";
-import { TouchableOpacity, useColorScheme } from "react-native";
-import { Menu as MenuPaper } from 'react-native-paper';
+import { Text, TouchableOpacity } from "react-native";
+import { Menu as MaterialMenu, MenuItem as MaterialMenuItem } from 'react-native-material-menu';
 
 type TMenuItem = {
     title: string
@@ -9,7 +9,11 @@ type TMenuItem = {
 
 export function MenuItem({ title, onPress }: TMenuItem) {
     return (
-        <MenuPaper.Item title={title} onPress={onPress} />
+        <MaterialMenuItem onPress={onPress}>
+            <Text className="text-primary text-base font-medium">
+                {title}
+            </Text>
+        </MaterialMenuItem>
     )
 }
 
@@ -20,35 +24,21 @@ type TMenu = {
 
 export function Menu({ children, anchor }: TMenu) {
     const [menuVisible, setMenuVisible] = useState(false);
-    const colorScheme = useColorScheme();
-    
-    const isDark = colorScheme === 'dark';
-    const backgroundColor = isDark ? '#1F2937' : '#FFFFFF';
-    const textColor = isDark ? '#F9FAFB' : '#111827';
 
     return (
-        <MenuPaper
+        <MaterialMenu
             visible={menuVisible}
-            onDismiss={() => setMenuVisible(false)}
+            onRequestClose={() => setMenuVisible(false)}
             anchor={
                 <TouchableOpacity onPress={() => setMenuVisible(true)}>
                     {anchor}
                 </TouchableOpacity>
             }
-            anchorPosition="bottom"
-            contentStyle={{
-                backgroundColor: backgroundColor,
-                shadowColor: 'transparent',
-                marginTop: 8,
+            style={{
                 borderRadius: 8,
-                paddingVertical: 0
+                marginTop: 28
             }}
-            theme={{
-                colors: {
-                    surface: backgroundColor,
-                    onSurface: textColor,
-                }
-            }}
+            animationDuration={0}
         >
             {Children.map(children, (child) => {
                 return cloneElement(child, {
@@ -58,6 +48,6 @@ export function Menu({ children, anchor }: TMenu) {
                     }
                 });
             })}
-        </MenuPaper>
+        </MaterialMenu>
     )
 }

@@ -11,9 +11,7 @@ export default function DecimalField({ className, error, label, ...props }: TDec
             error={error}
             label={label}
             input={
-                <DecimalInput
-                    {...props}
-                />
+                <DecimalInput {...props} />
             }
         />
     );

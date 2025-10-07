@@ -10,10 +10,7 @@ export default function TextField({ className, error, label, ...props }: TTextFi
             error={error}
             label={label}
             input={
-                <TextInput
-                    className="leading-6 px-5 py-4 text-lg text-gray-900 dark:text-gray-100"
-                    {...props}
-                />
+                <TextInput {...props}/>
             }
         />
     );

@@ -1,23 +1,15 @@
-import { Menu, MenuItem } from "@/components/Menu";
+import { Card } from "@/components/ui/Card";
+import { Menu, MenuItem } from "@/components/ui/Menu";
 import { useNavigation } from "@react-navigation/native";
-import { Calendar, PiggyBank, Plus, TrendingDown, TrendingUp } from "lucide-react-native";
-import { useState } from "react";
-import { ScrollView, Text, TouchableOpacity, View, useColorScheme } from "react-native";
+import { Calendar, ChevronDown, PiggyBank, Plus, Receipt, TrendingDown, TrendingUp } from "lucide-react-native";
+import { ScrollView, Text, View, useColorScheme } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function BillsScreen() {
-    const [activeMonth, setActiveMonth] = useState('Setembro')
     const colorScheme = useColorScheme();
     const isDark = colorScheme === 'dark';
 
-    const currentMonth = new Date().getMonth();
-
-    const remainingMonths = [
-        'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
-        'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
-    ].slice(currentMonth);
-
-    const billGroups = [
+    const billsGroups = [
         {
             id: 1,
             name: 'Contas Pessoais',
@@ -49,133 +41,148 @@ export default function BillsScreen() {
     const navigation = useNavigation<any>();
 
     return (
-        <SafeAreaView className="flex-1 bg-background dark:bg-background-dark px-6 py-2">
-            <View className="justify-between flex-row items-center mb-4">
-                <View className="flex-row items-center">
-                    <Calendar
-                        size={24}
-                        color={isDark ? "#9CA3AF" : "#6B7280"}
-                    />
+        <SafeAreaView className="flex-1 px-6 bg-primary">
+            <ScrollView bounces={false} showsVerticalScrollIndicator={false}>
+                <View className="justify-between flex-row items-center mb-4">
+                    <View>
+                        <Text className="text-3xl mb-1 font-bold text-primary">
+                            Bom dia, Antony
+                        </Text>
 
-                    <Text className="text-3xl font-semibold ml-2 text-text dark:text-text-dark">
-                        2025
-                    </Text>
+                        <Text className="text-secondary">
+                            Veja como estão suas finanças hoje
+                        </Text>
+                    </View>
+
+                    <Menu
+                        anchor={
+                            <Plus
+                                size={24}
+                                color={isDark ? "#9CA3AF" : "#6B7280"}
+                            />
+                        }
+                    >
+                        <MenuItem
+                            title="Adicionar conta"
+                            onPress={() => navigation.navigate('CreateBillsRouter')}
+                        />
+                    </Menu>
                 </View>
 
-                <Menu
-                    anchor={
-                        <Plus
-                            size={24}
-                            color={isDark ? "#9CA3AF" : "#6B7280"}
-                        />
-                    }
+                <ScrollView
+                    horizontal
+                    contentContainerClassName="gap-2 mb-3"
+                    showsHorizontalScrollIndicator={false}
+                    bounces={false}
                 >
-                    <MenuItem
-                        title="Adicionar conta"
-                        onPress={() => navigation.navigate('CreateBillsRouter')}
-                    />
-                </Menu>
-            </View>
+                    <Card className="bg-action-primary flex-row items-center gap-2 shadow-cardaction">
+                        <Calendar size={18} color="#FFFFFF" strokeWidth={2} />
 
-            <View className="mb-6">
-                <ScrollView horizontal showsHorizontalScrollIndicator={false} bounces={false}>
-                    <View className="flex-row gap-2">
-                        {remainingMonths.map(month => (
-                            <TouchableOpacity
-                                key={month}
-                                onPress={() => setActiveMonth(month)}
-                                className={`px-4 py-2 rounded-lg border ${activeMonth === month
-                                    ? 'bg-primary border-primary'
-                                    : 'bg-surface border-border dark:bg-surface-dark dark:border-border-dark'
-                                    }`}
-                            >
-                                <Text className={`font-semibold ${activeMonth === month
-                                    ? 'text-white'
-                                    : 'text-text-secondary dark:text-text-darkSecondary'
-                                    }`}>
-                                    {month}
-                                </Text>
-                            </TouchableOpacity>
-                        ))}
-                    </View>
+                        <Text className="text-base text-white font-semibold">
+                            2025
+                        </Text>
+
+                        <ChevronDown size={18} color="#FFFFFF" strokeWidth={2} />
+                    </Card>
+
+                    <Card className="flex-row items-center gap-2">
+                        <Text className="text-base text-primary font-semibold">
+                            Outubro
+                        </Text>
+
+                        <ChevronDown size={18} color="#1A1A1A" strokeWidth={2} />
+                    </Card>
                 </ScrollView>
-            </View>
 
-            <ScrollView bounces={false} showsVerticalScrollIndicator={false}>
-                <View className="flex-row gap-4 mb-4">
-                    <View className="flex-1 bg-error/10 dark:bg-error/20 border border-error/20 dark:border-error/30 rounded-2xl p-4">
+                <Text className="text-secondary text-base font-medium mb-3 tracking-wider">
+                    RESUMO FINANCEIRO
+                </Text>
+
+                <View className="flex-row gap-3 mb-3">
+                    <Card className="flex-1">
                         <View className="flex-row items-center justify-between mb-2">
-                            <Text className="text-text-secondary dark:text-text-darkSecondary text-sm font-medium">
-                                Total a Pagar
+                            <Text className="text-base text-secondary font-medium">
+                                Despesas
                             </Text>
 
-                            <TrendingDown size={20} color="#EF4444" />
+                            <View className="bg-negative-secondary p-1.5 rounded-md border-negative-primary border-[1px]">
+                                <TrendingDown size={20} color="#EF4444" />
+                            </View>
                         </View>
 
                         <Text className="text-2xl font-bold text-error">
                             R$ 1.250,00
                         </Text>
-                    </View>
+                    </Card>
 
-                    <View className="flex-1 bg-primary/10 dark:bg-primary/20 border border-primary/20 dark:border-primary/30 rounded-2xl p-4">
+                    <Card className="flex-1">
                         <View className="flex-row items-center justify-between mb-2">
-                            <Text className="text-text-secondary dark:text-text-darkSecondary text-sm font-medium">
-                                Sobrou
+                            <Text className="text-base text-secondary font-medium">
+                                Saldo do mês
                             </Text>
-                            <TrendingUp size={20} color="#22C55E" />
+
+                            <View className="bg-positive-secondary p-1.5 rounded-md border-positive-primary border-[1px]">
+                                <TrendingUp size={20} color="#22C55E" />
+                            </View>
                         </View>
 
                         <Text className="text-2xl font-bold text-primary">
                             R$ 750,00
                         </Text>
-                    </View>
+                    </Card>
                 </View>
 
-                <View
-                    className="bg-secondary/10 dark:bg-secondary/20 border border-secondary/20 dark:border-secondary/30 rounded-2xl p-4 mb-6"
-                >
+                <Card className="mb-4">
                     <View className="flex-row items-center justify-between mb-2">
-                        <Text className="text-text-secondary dark:text-text-darkSecondary text-sm font-medium">
-                            Guardado
+                        <Text className="text-base text-secondary font-medium">
+                            Saldo acumulado
                         </Text>
-                        <PiggyBank size={20} color="#10B981" />
+
+                        <View
+                            className="bg-warning-secondary p-1.5 rounded-md border-warning-primary border-[1px]"
+                        >
+                            <PiggyBank size={20} color="#FFD60A" />
+                        </View>
                     </View>
 
-                    <Text className="text-2xl font-bold text-secondary">
-                        R$ 500,00
+                    <Text className="text-2xl font-bold text-primary">
+                        R$ 10.000,00
                     </Text>
-                </View>
+                </Card>
 
-                {billGroups.map((group) => (
-                    <View key={group.id} className="mb-6">
-                        <View className="flex-row items-center mb-3">
-                            <Text className="text-text-secondary dark:text-text-darkSecondary text-base font-medium ml-2">
+                <Text className="text-secondary text-base font-medium mb-3 tracking-wider">
+                    CONTAS DO MÊS (15)
+                </Text>
+
+                <View className="gap-4">
+                    {billsGroups.map(group => (
+                        <View key={group.id}>
+                            <Text className="text-base font-semibold text-primary mb-2">
                                 {group.name}
                             </Text>
-                        </View>
 
-                        <View className="gap-4">
-                            {group.bills.map((bill) => (
-                                <TouchableOpacity
-                                    key={bill.id}
-                                    className="bg-surface dark:bg-surface-dark border rounded-xl p-4 border-border dark:border-border-dark"
-                                >
-                                    <View className="flex-row items-center justify-between">
-                                        <View className="flex-1">
-                                            <Text className="text-base font-medium text-text dark:text-text-dark">
-                                                {bill.name}
-                                            </Text>
+                            <View className="gap-4">
+                                {group.bills.map(bill => (
+                                    <Card key={bill.id} className="flex-row items-center gap-4">
+                                        <View
+                                            className="bg-action-secondary p-1.5 rounded-md border-action-primary border-[1px]"
+                                        >
+                                            <Receipt size={20} color="#6B4EFF" />
                                         </View>
 
-                                        <Text className={`text-lg font-bold text-text dark:text-text-dark`}>
-                                            R$ {bill.value.toFixed(2).replace('.', ',')}
+                                        <Text className="flex-1 font-medium">
+                                            {bill.name}
                                         </Text>
-                                    </View>
-                                </TouchableOpacity>
-                            ))}
+
+                                        <Text className="font-semibold text-xl">
+                                            R$ {bill.value},00
+                                        </Text>
+                                    </Card>
+                                ))}
+                            </View>
                         </View>
-                    </View>
-                ))}
+                    ))}
+                </View>
             </ScrollView>
         </SafeAreaView>
     );

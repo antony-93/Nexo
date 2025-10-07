@@ -29,7 +29,7 @@ export default function App() {
         <PaperProvider>
           <QueryClientProvider client={queryClient}>
             <BottomSheetModalProvider>
-              <StatusBar backgroundColor='black'/>
+              <StatusBar style="dark" />
               <Router />
             </BottomSheetModalProvider>
           </QueryClientProvider>

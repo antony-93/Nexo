@@ -10,7 +10,7 @@ export default function NumberField({ className, error, label, ...props }: TNumb
             error={error}
             label={label}
             input={
-                <NumberInput {...props}/>
+                <NumberInput {...props} />
             }
         />
     );
