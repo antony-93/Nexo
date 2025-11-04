@@ -1,4 +1,4 @@
-import { cn } from "@/utils/Styles";
+import { cn } from "@/shared/utils/Styles";
 import { useMemo } from "react";
 import { Text, View } from "react-native";
 

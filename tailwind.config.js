@@ -40,10 +40,30 @@ module.exports = {
       },
 
       colors: {
+        content: {
+          primary: '#1A1A1A',
+          secondary: '#6B7280',
+
+          dark: {
+            primary: '#FFFFFF',
+            secondary: '#B3B3B3'
+          },
+        },
+
+        surface: {
+          primary: '#FFFFFF',
+          secondary: '#F5F6FA',
+          highlight: '#E5E7EB',
+          
+          dark: {
+            highlight: '#2C2C2C',
+            primary: '#181818',
+            secondary: '#212121',
+          },
+        },
+
         action: {
           primary: '#6B4EFF',
-          primaryGradientStart: '#6B4EFF',
-          primaryGradientEnd: '#',
           secondary: '#ECECFF',
 
           dark: {

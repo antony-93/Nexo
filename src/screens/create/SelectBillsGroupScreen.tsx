@@ -1,6 +1,6 @@
-import { Card } from "@/components/ui/Card";
 import { useCreateBillsSchema } from "@/context/CreateBillsSchemaContext";
-import { useBillsGroupQuery } from "@/hooks/UseBillsGroup";
+import { useBillsGroupQuery } from "@/hooks/useBillsGroupQuery";
+import { Card } from "@/shared/components/Card";
 import { useNavigation } from "@react-navigation/native";
 import { Wallet } from "lucide-react-native";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";

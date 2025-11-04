@@ -10,7 +10,7 @@ type TMenuItem = {
 export function MenuItem({ title, onPress }: TMenuItem) {
     return (
         <MaterialMenuItem onPress={onPress}>
-            <Text className="text-primary text-base font-medium">
+            <Text className="text-content-primary text-base font-medium">
                 {title}
             </Text>
         </MaterialMenuItem>

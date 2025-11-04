@@ -1,9 +1,9 @@
-import DateField from "@/components/ui/fields/DateField";
-import DecimalField from "@/components/ui/fields/DecimalField";
-import NumberField from "@/components/ui/fields/NumberField";
-import TextField from "@/components/ui/fields/TextField";
 import { useCreateBillsSchema } from "@/context/CreateBillsSchemaContext";
 import { CreateBillsSchema, createBillsSchema } from "@/schemas/CreateBillsSchema";
+import DateField from "@/shared/components/fields/DateField";
+import DecimalField from "@/shared/components/fields/DecimalField";
+import NumberField from "@/shared/components/fields/NumberField";
+import TextField from "@/shared/components/fields/TextField";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigation } from "@react-navigation/native";
 import { Controller, useForm } from "react-hook-form";
