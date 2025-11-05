@@ -2,21 +2,41 @@ import { RequestResult } from "@/shared/types/Request";
 import { BillsGroup } from "@/types/BillsGroup";
 
 class BillsGroupRepository {
-    async list(): Promise<BillsGroup[]> {
-        return [
-            {
-                id: '1',
-                name: 'Contas Pessoais'
-            },
-            {
-                id: '2',
-                name: 'Contas da Família'
-            },
-            {
-                id: '3',
-                name: 'Contas do Trabalho'
-            }
-        ];
+    async list(): Promise<RequestResult<BillsGroup[]>> {
+        return {
+            success: true,
+            total: 3,
+            content: [
+                {
+                    id: '1',
+                    name: 'Contas Pessoais'
+                },
+                {
+                    id: '2',
+                    name: 'Contas da Família'
+                },
+                {
+                    id: '3',
+                    name: 'Contas do Trabalho'
+                },
+                {
+                    id: '4',
+                    name: 'Contas do Trabalho'
+                },
+                {
+                    id: '5',
+                    name: 'Contas do Trabalho'
+                },
+                {
+                    id: '6',
+                    name: 'Contas do Trabalho'
+                },
+                {
+                    id: '7',
+                    name: 'Contas do Trabalho'
+                },
+            ]
+        };
     }
 
     async listWithBills(): Promise<RequestResult<BillsGroup[]>> {

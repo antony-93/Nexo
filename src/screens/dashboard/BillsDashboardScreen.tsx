@@ -1,9 +1,7 @@
 import { useBillsGroupWithBillsQuery } from "@/hooks/useBillsGroupQuery";
-import { Card } from "@/shared/components/Card";
-import { Container } from "@/shared/components/Container";
-import { Menu, MenuItem } from "@/shared/components/Menu";
-import { Section } from "@/shared/components/Section";
-import { useNavigation } from "@react-navigation/native";
+import { RootStackParamList } from "@/routes/types";
+import { Card, Container, Menu, MenuItem, Section } from "@/shared/components";
+import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Calendar, ChevronDown, Plus, SlidersHorizontal } from "lucide-react-native";
 import { useState } from "react";
 import { NativeScrollEvent, NativeSyntheticEvent, ScrollView, Text } from "react-native";
@@ -11,19 +9,20 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import BillsList from "./components/billslist/BillsList";
 import FinancialSummary from "./components/indicators/FinancialSummary";
 
-export default function BillsDashboardScreen() {
-    const navigation = useNavigation<any>();
+type BillsDashboardScreenProps = NativeStackScreenProps<RootStackParamList, 'BillsDashboard'>;
+
+export default function BillsDashboardScreen({ navigation }: BillsDashboardScreenProps) {
     const { data } = useBillsGroupWithBillsQuery();
 
     const [isSticky, setIsSticky] = useState(false);
 
     const handleScroll = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
         const y = e.nativeEvent.contentOffset.y;
-        setIsSticky(y > 56);
+        setIsSticky(y > 63);
     };
 
     return (
-        <SafeAreaView className="flex-1 bg-surface-primary">
+        <SafeAreaView className="flex-1">
             <ScrollView
                 stickyHeaderIndices={[1]}
                 bounces={false}
@@ -39,7 +38,7 @@ export default function BillsDashboardScreen() {
                     <Menu anchor={<Plus size={24} color="#6B7280" />}>
                         <MenuItem
                             title="Adicionar conta"
-                            onPress={() => navigation.navigate("CreateBillsRouter")}
+                            onPress={() => navigation.navigate('CreateBills')}
                         />
                     </Menu>
                 </Container>

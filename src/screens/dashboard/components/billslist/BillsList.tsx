@@ -1,10 +1,8 @@
 import { useBillsGroupWithBillsQuery } from "@/hooks/useBillsGroupQuery";
-import { Card } from "@/shared/components/Card";
-import { Container } from "@/shared/components/Container";
-import { Section } from "@/shared/components/Section";
+import { BillCard } from "@/screens/components/BillCard";
+import { Container, Section } from "@/shared/components";
 import { BillsGroup } from "@/types/BillsGroup";
-import { Receipt } from "lucide-react-native";
-import { FlatList, Text } from "react-native";
+import { FlatList } from "react-native";
 
 export default function BillsList() {
     const { data } = useBillsGroupWithBillsQuery();
@@ -15,23 +13,7 @@ export default function BillsList() {
             labelClassName="font-semibold text-primary"
         >
             <Container className="gap-3">
-                {billsGroup.bills?.map(bill => (
-                    <Card direction="horizontal" key={bill.id} className="items-center gap-3">
-                        <Container
-                            className="bg-action-secondary p-1.5 rounded-md border-action-primary border-[1px]"
-                        >
-                            <Receipt size={20} color="#6B4EFF" />
-                        </Container>
-
-                        <Text className="flex-1 font-medium">
-                            {bill.name}
-                        </Text>
-
-                        <Text className="font-semibold text-xl">
-                            R$ {bill.value},00
-                        </Text>
-                    </Card>
-                ))}
+                {billsGroup.bills?.map(bill => <BillCard key={bill.id} bill={bill} />)}
             </Container>
         </Section>
     );

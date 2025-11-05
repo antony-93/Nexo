@@ -1,6 +1,5 @@
 import { useFinancialSummary } from "@/hooks/useBillsQuery";
-import { Card } from "@/shared/components/Card";
-import { Container } from "@/shared/components/Container";
+import { Card, Container } from "@/shared/components";
 import { PiggyBank, TrendingDown, TrendingUp } from "lucide-react-native";
 import { Text } from "react-native";
 

@@ -1,59 +1,57 @@
-import { useCreateBillsSchema } from "@/context/CreateBillsSchemaContext";
 import { useBillsGroupQuery } from "@/hooks/useBillsGroupQuery";
-import { Card } from "@/shared/components/Card";
-import { useNavigation } from "@react-navigation/native";
+import { CreateBillsStackParamList } from "@/routes/types";
+import { Card, Container } from "@/shared/components";
+import { BillsGroup } from "@/types/BillsGroup";
+import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Wallet } from "lucide-react-native";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { FlatList } from "react-native-gesture-handler";
 
-export default function SelectBillsGroupScreen() {
-    const { data = [] } = useBillsGroupQuery();
+type SelectBillsGroupScreenProps = NativeStackScreenProps<
+    CreateBillsStackParamList,
+    'SelectBillsGroup'
+>;
 
-    const { setBillsGroupId } = useCreateBillsSchema();
+export default function SelectBillsGroupScreen({ navigation }: SelectBillsGroupScreenProps) {
+    const { data } = useBillsGroupQuery();
 
-    const navigation = useNavigation<any>();
+    const renderBillsGroupCard = (billsGroup: BillsGroup) => (
+        <TouchableOpacity
+            onPress={() => navigation.navigate('BillsForm')}
+        >
+            <Card direction="horizontal" className="items-center gap-4">
+                <View
+                    className="bg-action-secondary p-1.5 rounded-md border-action-primary border-[1px]"
+                >
+                    <Wallet size={20} color="#6B4EFF" />
+                </View>
 
-    const handleSelectBillsGroupId = (billsGroupId: string) => {
-        setBillsGroupId(billsGroupId);
-        navigation.navigate('BillsFormScreen')
-    }
+                <Text className="flex-1 font-medium">
+                    {billsGroup.name}
+                </Text>
+            </Card>
+        </TouchableOpacity>
+    );
 
     return (
-        <SafeAreaView className="flex-1 px-6 bg-primary">
-            <View className="mb-4">
-                <Text className="text-3xl mb-1 font-bold text-primary">
+        <ScrollView bounces={false}>
+            <Container className="mb-4">
+                <Text className="text-3xl mb-1 font-bold text-content-primary">
                     Selecionar grupo de contas
                 </Text>
 
                 <Text className="text-secondary">
                     Selecione um grupo de contas para sua nova conta
                 </Text>
-            </View>
+            </Container>
 
-            <ScrollView
-                showsVerticalScrollIndicator={false}
-                bounces={false}
-                contentContainerClassName="gap-4"
-            >
-                {data.map(bg => (
-                    <TouchableOpacity
-                        onPress={() => handleSelectBillsGroupId(bg.id)}
-                        key={bg.id}
-                    >
-                        <Card key={bg.id} className="flex-row items-center gap-4">
-                            <View
-                                className="bg-action-secondary p-1.5 rounded-md border-action-primary border-[1px]"
-                            >
-                                <Wallet size={20} color="#6B4EFF" />
-                            </View>
-
-                            <Text className="flex-1 font-medium">
-                                {bg.name}
-                            </Text>
-                        </Card>
-                    </TouchableOpacity>
-                ))}
-            </ScrollView>
-        </SafeAreaView>
+            <FlatList
+                scrollEnabled={false}
+                contentContainerClassName="gap-4 mb-2"
+                renderItem={({ item }) => renderBillsGroupCard(item)}
+                data={data?.content}
+                keyExtractor={bg => bg.id}
+            />
+        </ScrollView>
     );
 }
