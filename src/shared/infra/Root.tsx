@@ -31,17 +31,7 @@ export default function Root({ children }: RootProps) {
         <PaperProvider>
           <QueryClientProvider client={queryClient}>
             <BottomSheetModalProvider>
-              <NavigationContainer
-                onStateChange={(state) => {
-                  if (state) {
-                    const routes = state?.routes ?? [];
-                    const current = routes[state.index];
-                    const previous = routes[state.index - 1];
-                    console.log("Anterior:", previous);
-                    console.log("Atual:", current);
-                  }
-                }}
-              >
+              <NavigationContainer>
                 {children}
               </NavigationContainer>
             </BottomSheetModalProvider>

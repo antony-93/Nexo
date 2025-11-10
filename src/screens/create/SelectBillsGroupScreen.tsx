@@ -1,3 +1,4 @@
+import { useCreateBillsSchema } from "@/context/CreateBillsSchemaContext";
 import { useBillsGroupQuery } from "@/hooks/useBillsGroupQuery";
 import { CreateBillsStackParamList } from "@/routes/types";
 import { Card, Container } from "@/shared/components";
@@ -15,10 +16,15 @@ type SelectBillsGroupScreenProps = NativeStackScreenProps<
 export default function SelectBillsGroupScreen({ navigation }: SelectBillsGroupScreenProps) {
     const { data } = useBillsGroupQuery();
 
+    const { setBillsGroupId } = useCreateBillsSchema();
+
+    const handleBillsGroup = (billsGroupId: string) => {
+        setBillsGroupId(billsGroupId);
+        navigation.navigate('BillsForm');
+    }
+
     const renderBillsGroupCard = (billsGroup: BillsGroup) => (
-        <TouchableOpacity
-            onPress={() => navigation.navigate('BillsForm')}
-        >
+        <TouchableOpacity onPress={() => handleBillsGroup(billsGroup.id)}>
             <Card direction="horizontal" className="items-center gap-4">
                 <View
                     className="bg-action-secondary p-1.5 rounded-md border-action-primary border-[1px]"
@@ -37,7 +43,7 @@ export default function SelectBillsGroupScreen({ navigation }: SelectBillsGroupS
         <ScrollView bounces={false}>
             <Container className="mb-4">
                 <Text className="text-3xl mb-1 font-bold text-content-primary">
-                    Selecionar grupo de contas
+                    Grupo de contas
                 </Text>
 
                 <Text className="text-secondary">

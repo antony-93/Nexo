@@ -1,6 +1,7 @@
 import { cn } from "@/shared/utils/Styles";
 import { useMemo } from "react";
-import { Text, View } from "react-native";
+import { Text } from "react-native";
+import { Container } from "../Container";
 
 export type TField = {
     input: React.ReactNode
@@ -17,36 +18,34 @@ export function Field({
 }: TField) {
     const clsField = useMemo(() => {
         const defaultClsField: string = `
-            bg-secondary
-            border border-primary
-            rounded-lg
-            shadow-card
+            bg-surface-primary
+            border border-surface-highlight
+            rounded-md
         `;
 
         return cn(
             defaultClsField,
             error ? 'border-red-500 dark:border-red-400' : ''
         );
-
     }, [error]);
 
     return (
-        <View className={className}>
+        <Container className={className}>
             {label && (
-                <Text className="text-lg text-primary mb-2 font-medium">
+                <Text className="text-base text-content-primary mb-1">
                     {label}
                 </Text>
             )}
 
-            <View className={clsField}>
+            <Container className={clsField}>
                 {input}
-            </View>
+            </Container>
 
             {error && (
-                <Text className="text-red-500 dark:text-red-400 text-sm mt-2">
+                <Text className="text-red-500 dark:text-red-400 text-sm mt-1">
                     {error}
                 </Text>
             )}
-        </View>
+        </Container>
     );
 }

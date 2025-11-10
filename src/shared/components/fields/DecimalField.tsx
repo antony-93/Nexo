@@ -4,7 +4,7 @@ import { Field, TField } from "./Field";
 
 type TDecimalField = TNumberInput & Omit<TField, 'input'>
 
-export default function DecimalField({ className, error, label, ...props }: TDecimalField) {
+export function DecimalField({ className, error, label, ...props }: TDecimalField) {
     return (
         <Field
             className={className}

@@ -6,7 +6,7 @@ import { Receipt } from "lucide-react-native";
 import { Text } from "react-native";
 
 type BillCardProps = ContainerProps & {
-    bill: Bill
+    bill: Omit<Bill, 'id'>
 }
 
 export function BillCard({ bill, className, ...props }: BillCardProps) {
@@ -27,7 +27,10 @@ export function BillCard({ bill, className, ...props }: BillCardProps) {
             </Text>
 
             <Text className="font-semibold text-xl">
-                R$ {bill.value},00
+                {bill.value.toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL'
+                })}
             </Text>
         </Card>
     );

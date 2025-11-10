@@ -3,7 +3,7 @@ import { Field, TField } from "./Field";
 
 type TDateField = TDateInput & Omit<TField, 'input'>
 
-export default function DateField({ className, error, label, ...props }: TDateField) {
+export function DateField({ className, error, label, ...props }: TDateField) {
     return (
         <Field
             className={className}

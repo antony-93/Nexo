@@ -6,4 +6,5 @@ export type RootStackParamList = {
 export type CreateBillsStackParamList = {
     SelectBillsGroup: undefined;
     BillsForm: undefined;
+    BillsToCreateList: undefined;
 }

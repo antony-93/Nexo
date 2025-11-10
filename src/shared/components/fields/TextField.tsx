@@ -3,9 +3,9 @@ import { Field, TField } from "./Field";
 
 type TTextField = TTextInput & Omit<TField, 'input'>
 
-export default function TextField({ className, error, label, ...props }: TTextField) {
+export function TextField({ className, error, label, ...props }: TTextField) {
     return (
-        <Field 
+        <Field
             className={className}
             error={error}
             label={label}

@@ -3,7 +3,7 @@ import { Field, TField } from "./Field";
 
 type TNumberField = TNumberInput & Omit<TField, 'input'>
 
-export default function NumberField({ className, error, label, ...props }: TNumberField) {
+export function NumberField({ className, error, label, ...props }: TNumberField) {
     return (
         <Field 
             className={className}

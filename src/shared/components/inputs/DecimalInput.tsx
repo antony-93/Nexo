@@ -1,5 +1,5 @@
 import { MaskInputProps, Masks } from 'react-native-mask-input';
-import Input from "./Input";
+import { Input } from "./Input";
 
 export type TDecimalInput = Omit<MaskInputProps, 'onChangeText' | 'value' | 'onChange'> & {
     value?: number
@@ -43,7 +43,7 @@ export function DecimalInput({
     const handleKeyPress = (event: any) => {
         // Permite apenas números (0-9) e backspace
         const { key } = event.nativeEvent;
-        
+
         if (key === 'Backspace') {
             // Se o valor atual é 0, não permite apagar
             if (value === 0) {

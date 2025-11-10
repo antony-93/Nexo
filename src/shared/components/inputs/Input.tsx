@@ -1,10 +1,11 @@
 import MaskInput, { MaskInputProps } from "react-native-mask-input";
 
-export default function Input(props: MaskInputProps) {
+export function Input(props: MaskInputProps) {
     return (
         <MaskInput
-            className="text-lg border-action-primary border text-primary"
-            placeholderClassName="text-primary"
+            className="text-content-primary text-lg py-5 px-2"
+            style={{ lineHeight: 18 }}
+            placeholderTextColor={'#6B7280'}
             {...props}
         />
     );

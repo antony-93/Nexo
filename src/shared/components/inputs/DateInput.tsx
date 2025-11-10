@@ -5,7 +5,7 @@ import { Keyboard, Text, TouchableOpacity, View, useColorScheme } from "react-na
 import { Calendar } from 'react-native-calendars';
 import { MaskInputProps, Masks } from 'react-native-mask-input';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Input from "./Input";
+import { Input } from "./Input";
 
 export type TDateInput = Omit<MaskInputProps, 'onChangeText' | 'value' | 'onChange'> & {
     value?: Date
@@ -26,7 +26,7 @@ export function DateInput({
         const date = parseISO(selectedDate).toISOString();
 
         onChange?.(new Date(date));
-        
+
         bottomSheetRef.current?.close();
     };
 
