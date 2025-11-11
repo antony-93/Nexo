@@ -1,26 +1,19 @@
 import { createBillsSchema, CreateBillsSchema } from "@/schemas/CreateBillsSchema";
-import { Bill } from "@/types/Bill";
-import { generateBills } from "@/utils/generateBills";
+import { BillsGroup } from "@/types/BillsGroup";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createContext, FC, useContext, useState } from "react";
+import { createContext, FC, useContext } from "react";
 import { Control, useForm, UseFormHandleSubmit } from "react-hook-form";
 
 type CreateBillsSchemaContextData = {
-    createBillsSchema: CreateBillsSchema;
     control: Control<CreateBillsSchema>;
     handleSubmit: UseFormHandleSubmit<CreateBillsSchema>;
-    bills: Omit<Bill, 'id'>[];
-    generateBillsFromForm(data: CreateBillsSchema): void;
-    setBillsGroupId(billsGroupId: string): void;
+    setBillsGroup(billsGroup: BillsGroup): void;
 }
 
 const CreateBillsSchemaContext = createContext<CreateBillsSchemaContextData | undefined>(undefined);
 
 export const CreateBillsSchemaProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
-    const [bills, setBills] = useState<Omit<Bill, 'id'>[]>([]);
-
     const {
-        watch, 
         setValue, 
         control,
         handleSubmit
@@ -28,7 +21,6 @@ export const CreateBillsSchemaProvider: FC<{ children: React.ReactNode }> = ({ c
         resolver: zodResolver(createBillsSchema),
         mode: 'onBlur',
         defaultValues: {
-            billsGroupId: '',
             installments: 1,
             name: '',
             value: 0,
@@ -36,24 +28,16 @@ export const CreateBillsSchemaProvider: FC<{ children: React.ReactNode }> = ({ c
         }
     });
 
-    const setBillsGroupId = (billsGroupId: string) => {
-        setValue('billsGroupId', billsGroupId);
-    };
-    
-    const generateBillsFromForm = (data: CreateBillsSchema) => {
-        const generatedBills = generateBills(data);
-        setBills(generatedBills);
+    const setBillsGroup = (billsGroup: BillsGroup) => {
+        setValue('billsGroup', billsGroup);
     };
 
     return (
         <CreateBillsSchemaContext.Provider 
             value={{
-                createBillsSchema: watch(),
                 control,
                 handleSubmit,
-                bills,
-                generateBillsFromForm,
-                setBillsGroupId
+                setBillsGroup
             }}
         >
             {children}

@@ -1,4 +1,11 @@
+import { BillsGroup } from "@/types/BillsGroup";
 import { z } from "zod";
+
+const billsGroupSchema = z.object({
+    id: z.string().min(1, "O ID do grupo de contas é obrigatório"),
+    name: z.string().min(1, "O nome do grupo de contas é obrigatório"),
+    bills: z.array(z.any()).optional()
+}) satisfies z.ZodType<BillsGroup>;
 
 export const createBillsSchema = z.object({
     name: z.string()
@@ -18,7 +25,7 @@ export const createBillsSchema = z.object({
         message: "A data de início é obrigatória"
     }),
 
-    billsGroupId: z.string()
+    billsGroup: billsGroupSchema
 });
 
 export type CreateBillsSchema = z.infer<typeof createBillsSchema>;

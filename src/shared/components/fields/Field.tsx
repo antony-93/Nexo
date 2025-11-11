@@ -20,7 +20,7 @@ export function Field({
         const defaultClsField: string = `
             bg-surface-primary
             border border-surface-highlight
-            rounded-md
+            rounded-lg
         `;
 
         return cn(
@@ -32,7 +32,7 @@ export function Field({
     return (
         <Container className={className}>
             {label && (
-                <Text className="text-base text-content-primary mb-1">
+                <Text className="font-medium text-base text-content-secondary mb-1">
                     {label}
                 </Text>
             )}

@@ -5,7 +5,7 @@ import { Card, Container } from "@/shared/components";
 import { BillsGroup } from "@/types/BillsGroup";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Wallet } from "lucide-react-native";
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 
 type SelectBillsGroupScreenProps = NativeStackScreenProps<
@@ -16,20 +16,20 @@ type SelectBillsGroupScreenProps = NativeStackScreenProps<
 export default function SelectBillsGroupScreen({ navigation }: SelectBillsGroupScreenProps) {
     const { data } = useBillsGroupQuery();
 
-    const { setBillsGroupId } = useCreateBillsSchema();
+    const { setBillsGroup } = useCreateBillsSchema();
 
-    const handleBillsGroup = (billsGroupId: string) => {
-        setBillsGroupId(billsGroupId);
+    const handleBillsGroup = (billsGroup: BillsGroup) => {
+        setBillsGroup(billsGroup);
         navigation.navigate('BillsForm');
     }
 
     const renderBillsGroupCard = (billsGroup: BillsGroup) => (
-        <TouchableOpacity onPress={() => handleBillsGroup(billsGroup.id)}>
+        <TouchableOpacity onPress={() => handleBillsGroup(billsGroup)}>
             <Card direction="horizontal" className="items-center gap-4">
                 <View
                     className="bg-action-secondary p-1.5 rounded-md border-action-primary border-[1px]"
                 >
-                    <Wallet size={20} color="#6B4EFF" />
+                    <Wallet size={24} color="#6B4EFF" />
                 </View>
 
                 <Text className="flex-1 font-medium">
@@ -40,7 +40,7 @@ export default function SelectBillsGroupScreen({ navigation }: SelectBillsGroupS
     );
 
     return (
-        <ScrollView bounces={false}>
+        <>
             <Container className="mb-4">
                 <Text className="text-3xl mb-1 font-bold text-content-primary">
                     Grupo de contas
@@ -52,12 +52,12 @@ export default function SelectBillsGroupScreen({ navigation }: SelectBillsGroupS
             </Container>
 
             <FlatList
-                scrollEnabled={false}
+                bounces={false}
                 contentContainerClassName="gap-4 mb-2"
                 renderItem={({ item }) => renderBillsGroupCard(item)}
                 data={data?.content}
                 keyExtractor={bg => bg.id}
             />
-        </ScrollView>
+        </>
     );
 }

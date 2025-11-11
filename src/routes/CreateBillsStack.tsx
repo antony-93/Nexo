@@ -1,6 +1,6 @@
 import { CreateBillsSchemaProvider } from '@/context/CreateBillsSchemaContext';
 import BillsFormScreen from '@/screens/create/BillsFormScreen';
-import BillsToCreateListScreen from '@/screens/create/BillsToCreateListScreen';
+import BillsPreview from '@/screens/create/BillsPreview';
 import SelectBillsGroupScreen from '@/screens/create/SelectBillsGroupScreen';
 import { Container, GoBackBar } from '@/shared/components';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -11,35 +11,35 @@ const Stack = createNativeStackNavigator<CreateBillsStackParamList>();
 
 export default function CreateBillsStack() {
     return (
-        <Stack.Navigator
-            screenOptions={{ headerShown: false }}
-            initialRouteName='SelectBillsGroup'
-            screenLayout={({ children }) => (
-                <CreateBillsSchemaProvider>
+        <CreateBillsSchemaProvider>
+            <Stack.Navigator
+                screenOptions={{ headerShown: false }}
+                initialRouteName='SelectBillsGroup'
+                screenLayout={({ children }) => (
                     <SafeAreaView className='flex-1 bg-surface-primary'>
-                        <GoBackBar title='Voltar' className='mb-2 px-2' />
+                        <GoBackBar title='Voltar' className='mb-1 px-2' />
 
                         <Container className='px-6 flex-1'>
                             {children}
                         </Container>
                     </SafeAreaView>
-                </CreateBillsSchemaProvider>
-            )}
-        >
-            <Stack.Screen
-                name='SelectBillsGroup'
-                component={SelectBillsGroupScreen}
-            />
+                )}
+            >
+                <Stack.Screen
+                    name='SelectBillsGroup'
+                    component={SelectBillsGroupScreen}
+                />
 
-            <Stack.Screen
-                name='BillsForm'
-                component={BillsFormScreen}
-            />
+                <Stack.Screen
+                    name='BillsForm'
+                    component={BillsFormScreen}
+                />
 
-            <Stack.Screen
-                name='BillsToCreateList'
-                component={BillsToCreateListScreen}
-            />
-        </Stack.Navigator>
+                <Stack.Screen
+                    name='BillsPreview'
+                    component={BillsPreview}
+                />
+            </Stack.Navigator>
+        </CreateBillsSchemaProvider>
     )
 }

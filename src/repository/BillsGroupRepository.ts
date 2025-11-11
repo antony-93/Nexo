@@ -32,7 +32,43 @@ class BillsGroupRepository {
                     name: 'Contas do Trabalho'
                 },
                 {
-                    id: '7',
+                    id: '8',
+                    name: 'Contas do Trabalho'
+                },
+                {
+                    id: '9',
+                    name: 'Contas do Trabalho'
+                },
+                {
+                    id: '10',
+                    name: 'Contas do Trabalho'
+                },
+                {
+                    id: '11',
+                    name: 'Contas do Trabalho'
+                },
+                {
+                    id: '12',
+                    name: 'Contas do Trabalho'
+                },
+                {
+                    id: '13',
+                    name: 'Contas do Trabalho'
+                },
+                {
+                    id: '14',
+                    name: 'Contas do Trabalho'
+                },
+                {
+                    id: '15',
+                    name: 'Contas do Trabalho'
+                },
+                {
+                    id: '16',
+                    name: 'Contas do Trabalho'
+                },
+                {
+                    id: '17',
                     name: 'Contas do Trabalho'
                 },
             ]
