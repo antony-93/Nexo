@@ -4,8 +4,8 @@ import { CreateBillsStackParamList } from "@/routes/types";
 import { Card, Container } from "@/shared/components";
 import { BillsGroup } from "@/types/BillsGroup";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { Wallet } from "lucide-react-native";
-import { Text, TouchableOpacity, View } from "react-native";
+import { ChevronRight, Wallet } from "lucide-react-native";
+import { Text, TouchableOpacity } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 
 type SelectBillsGroupScreenProps = NativeStackScreenProps<
@@ -26,15 +26,17 @@ export default function SelectBillsGroupScreen({ navigation }: SelectBillsGroupS
     const renderBillsGroupCard = (billsGroup: BillsGroup) => (
         <TouchableOpacity onPress={() => handleBillsGroup(billsGroup)}>
             <Card direction="horizontal" className="items-center gap-4">
-                <View
+                <Container
                     className="bg-action-secondary p-1.5 rounded-md border-action-primary border-[1px]"
                 >
                     <Wallet size={24} color="#6B4EFF" />
-                </View>
+                </Container>
 
                 <Text className="flex-1 font-medium">
                     {billsGroup.name}
                 </Text>
+
+                <ChevronRight size={20} color={'#6B7280'}/>
             </Card>
         </TouchableOpacity>
     );

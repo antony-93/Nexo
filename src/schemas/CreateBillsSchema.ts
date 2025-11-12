@@ -29,4 +29,3 @@ export const createBillsSchema = z.object({
 });
 
 export type CreateBillsSchema = z.infer<typeof createBillsSchema>;
-
