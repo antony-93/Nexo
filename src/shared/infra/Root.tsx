@@ -7,6 +7,7 @@ import { ReactNode } from 'react';
 import { Text } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Provider as PaperProvider } from 'react-native-paper';
+import 'react-native-reanimated';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 type RootProps = {
@@ -32,7 +33,7 @@ export default function Root({ children }: RootProps) {
           <QueryClientProvider client={queryClient}>
             <BottomSheetModalProvider>
               <NavigationContainer>
-                {children}
+                  {children}
               </NavigationContainer>
             </BottomSheetModalProvider>
           </QueryClientProvider>

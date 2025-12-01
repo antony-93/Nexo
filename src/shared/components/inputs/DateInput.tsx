@@ -3,7 +3,7 @@ import { format, parseISO } from "date-fns";
 import { useRef, useState } from 'react';
 import { Keyboard, Text, TouchableOpacity, View, useColorScheme } from "react-native";
 import { Calendar } from 'react-native-calendars';
-import { MaskInputProps, Masks } from 'react-native-mask-input';
+import { MaskInputProps } from 'react-native-mask-input';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Input } from "./Input";
 
@@ -41,7 +41,6 @@ export function DateInput({
                 <Input
                     editable={false}
                     value={format(value, 'dd-MM-yyyy')}
-                    mask={Masks.DATE_DDMMYYYY}
                     pointerEvents="none"
                     {...props}
                 />

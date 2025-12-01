@@ -54,7 +54,7 @@ module.exports = {
           primary: '#FFFFFF',
           secondary: '#F5F6FA',
           highlight: '#E5E7EB',
-          
+
           dark: {
             highlight: '#2C2C2C',
             primary: '#181818',
@@ -63,12 +63,12 @@ module.exports = {
         },
 
         action: {
-          primary: '#6B4EFF',
-          secondary: '#ECECFF',
+          primary: '#820AD1',
+          secondary: '#F5F0FF',
 
           dark: {
-            primary: '#8E7BFF',
-            secondary: '#3C3C3C',
+            primary: '#5C00B1',
+            secondary: '#2C2C2C',
           },
         },
 
@@ -101,6 +101,16 @@ module.exports = {
             secondary: '#332A00',
           },
         },
+
+        neutral: {
+          primary: '#3B82F6',
+          secondary: '#DBEAFE',
+        
+          dark: {
+            primary: '#60A5FA',
+            secondary: '#1E3A8A',
+          },
+        },        
       },
 
       borderRadius: {

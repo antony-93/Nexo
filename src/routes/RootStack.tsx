@@ -1,7 +1,8 @@
-import BillsDashboardScreen from '@/screens/dashboard/BillsDashboardScreen';
-import { Container } from '@/shared/components';
+import ExpensesByGroupListScreen from '@/screens/finances/expenses/list/ExpensesByGroupListScreen';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import CreateBillsStack from './CreateBillsStack';
+import CreateCategoryStack from './CreateCategoryStack';
+import CreateExpensesStack from './CreateExpensesStack';
+import HomeStack from './HomeStack';
 import { RootStackParamList } from './types';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -10,21 +11,26 @@ export default function RootStack() {
     return (
         <Stack.Navigator
             screenOptions={{ headerShown: false }}
-            initialRouteName='BillsDashboard'
-            screenLayout={({ children }) => (
-                <Container className='flex-1 bg-surface-primary'>
-                    {children}
-                </Container>
-            )}
+            initialRouteName='Home'
         >
             <Stack.Screen
-                name='BillsDashboard'
-                component={BillsDashboardScreen}
+                name='Home'
+                component={HomeStack}
             />
 
             <Stack.Screen
-                name='CreateBills'
-                component={CreateBillsStack}
+                name='CreateExpenses'
+                component={CreateExpensesStack}
+            />
+
+            <Stack.Screen
+                name='CreateCategory'
+                component={CreateCategoryStack}
+            />
+
+            <Stack.Screen
+                name='ExpenseByGroupList'
+                component={ExpensesByGroupListScreen}
             />
         </Stack.Navigator>
     );

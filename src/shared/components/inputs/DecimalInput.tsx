@@ -1,4 +1,4 @@
-import { MaskInputProps, Masks } from 'react-native-mask-input';
+import { MaskInputProps } from 'react-native-mask-input';
 import { Input } from "./Input";
 
 export type TDecimalInput = Omit<MaskInputProps, 'onChangeText' | 'value' | 'onChange'> & {
@@ -62,7 +62,6 @@ export function DecimalInput({
             value={formatNumberToString(value)}
             onChangeText={handleTextChange}
             onKeyPress={handleKeyPress}
-            mask={Masks.BRL_CURRENCY}
             keyboardType="number-pad"
             {...props}
         />
