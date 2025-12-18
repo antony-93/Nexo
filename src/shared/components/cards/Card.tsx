@@ -1,6 +1,6 @@
 import { cn } from "@/shared/utils/Styles";
 import { useMemo } from "react";
-import { Container, ContainerProps } from "./Container";
+import { Container, ContainerProps } from "../Container";
 
 export function Card({ className, ...props }: ContainerProps) {
     const cardCls = useMemo(() => {

@@ -1,6 +1,6 @@
 import { useExpensesByCategoryQuery } from "@/context/LoadExpensesByCategoryQueryContext";
 import { HomeStackParamList, RootStackParamList } from "@/routes/types";
-import { Container, Section } from "@/shared/components";
+import { Container, Section, Tabs, TabScreen } from "@/shared/components";
 import type { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import type { CompositeScreenProps } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
@@ -59,9 +59,15 @@ export default function DashboardScreen({ navigation }: DashboardScreenProps) {
                     <FinanceSummary />
                 </Section>
 
-                <Section label={`DESPESAS DO MÊS (${data?.total || 0})`}>
-                    <ExpensesListByCategory />
-                </Section>
+                <Tabs>
+                    <TabScreen name="Despesas">
+                        <ExpensesListByCategory />
+                    </TabScreen>
+
+                    <TabScreen name="Receitas">
+                        <ExpensesListByCategory />
+                    </TabScreen>
+                </Tabs>
             </Container>
         </ScrollView>
     );

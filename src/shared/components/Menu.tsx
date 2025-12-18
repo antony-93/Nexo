@@ -1,16 +1,22 @@
-import { Children, cloneElement, ReactElement, ReactNode, useState } from "react";
+import { Children, cloneElement, ReactElement, ReactNode, useMemo, useState } from "react";
 import { Text, TouchableOpacity } from "react-native";
 import { Menu as MaterialMenu, MenuItem as MaterialMenuItem } from 'react-native-material-menu';
+import { cn } from "../utils/Styles";
 
 type TMenuItem = {
     title: string
+    className?: string;
     onPress: () => void
 }
 
-export function MenuItem({ title, onPress }: TMenuItem) {
+export function MenuItem({ title, onPress, className }: TMenuItem) {
+    const cls = useMemo(() => {
+        return cn('text-content-primary text-base font-medium', className)
+    }, [className]);
+
     return (
         <MaterialMenuItem onPress={onPress}>
-            <Text className="text-content-primary text-base font-medium">
+            <Text className={cls}>
                 {title}
             </Text>
         </MaterialMenuItem>

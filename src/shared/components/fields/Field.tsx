@@ -20,7 +20,7 @@ export function Field({
         const defaultClsField: string = `
             bg-surface-primary
             border border-surface-highlight
-            rounded-lg
+            rounded-[10px]
         `;
 
         return cn(

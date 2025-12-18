@@ -2,7 +2,7 @@ export type RootStackParamList = {
     Home: undefined
     CreateExpenses: undefined;
     CreateCategory: undefined;
-    ExpenseByGroupList: { groupId: string };
+    ExpenseByGroupList: { expenseGroupId: string };
 }
 
 export type CreateExpensesStackParamList = {

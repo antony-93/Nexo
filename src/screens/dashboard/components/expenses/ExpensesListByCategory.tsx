@@ -1,10 +1,10 @@
 import { useExpensesByCategoryQuery } from "@/context/LoadExpensesByCategoryQueryContext";
 import { ExpenseCard } from "@/screens/components/ExpenseCard";
-import { Button, Container, Section } from "@/shared/components";
+import { Container, SaveButton, Section } from "@/shared/components";
 import { TextAreaField } from "@/shared/components/fields";
 import { Expense, ExpenseByCategory } from "@/types/Expense";
 import { BottomSheetBackdrop, BottomSheetModal, BottomSheetView } from "@gorhom/bottom-sheet";
-import { Calendar, Save } from "lucide-react-native";
+import { Calendar } from "lucide-react-native";
 import { useRef, useState } from "react";
 import { FlatList, Keyboard, Pressable, Text } from "react-native";
 import { Divider } from "react-native-paper";
@@ -19,7 +19,6 @@ export default function ExpensesListByCategory() {
 
     const handleExpense = (expense: Omit<Expense, 'categoryId'>) => {
         setExpense(expense);
-        console.log('expense', expense)
         bottomSheetExpense.current?.present();
     }
 
@@ -60,11 +59,11 @@ export default function ExpensesListByCategory() {
                 keyboardBehavior="interactive"
                 keyboardBlurBehavior="restore"
                 ref={bottomSheetExpense}
-                snapPoints={['55%']}
+                snapPoints={['1%']}
                 index={1}
             >
                 <SafeAreaView className='h-full' edges={['bottom', 'left', 'right']}>
-                    <BottomSheetView>
+                    <BottomSheetView className="pb-8">
                         <Pressable onPress={Keyboard.dismiss}>
                             <Container className="px-6 gap-4">
                                 <Container>
@@ -103,13 +102,10 @@ export default function ExpensesListByCategory() {
                                 <TextAreaField
                                     label="Observação (opcional)"
                                     value={expense?.notes}
-                                    className="mb-4"
+                                    className="mb-1"
                                 />
 
-                                <Button
-                                    icon={<Save size={20} color={'white'} />}
-                                    text="Salvar"
-                                />
+                                <SaveButton />
                             </Container>
                         </Pressable>
                     </BottomSheetView>

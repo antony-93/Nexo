@@ -1,6 +1,6 @@
 import { useCreateExpensesSchema } from "@/context/CreateExpensesSchemaContext";
 import { CreateExpensesStackParamList } from "@/routes/types";
-import { Button, Container } from "@/shared/components";
+import { Container, NextButton } from "@/shared/components";
 import { DateField, DecimalField, NumberField, TextAreaField, TextField } from "@/shared/components/fields";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Controller } from "react-hook-form";
@@ -105,10 +105,7 @@ export default function ExpenseFormScreen({ navigation }: ExpenseFormScreenProps
                     )}
                 />
 
-                <Button 
-                    onPress={handleSubmit(onSubmit)}
-                    text="Próximo"
-                />
+                <NextButton onPress={handleSubmit(onSubmit)}/>
             </ScrollView>
         </>
     );

@@ -58,11 +58,11 @@ export function SelectDateAction({ onDateChange, ...props }: SelectDateActionPro
                     />
                 )}
                 ref={bottomSheetDate}
-                snapPoints={['50%']}
+                snapPoints={['1%']}
                 index={1}
             >
                 <SafeAreaView className='h-full' edges={['bottom', 'left', 'right']}>
-                    <BottomSheetView>
+                    <BottomSheetView className="pb-8">
                         <Container className="px-4">
                             <Text className="text-center text-xl font-semibold mb-4">Selecionar mês</Text>
 

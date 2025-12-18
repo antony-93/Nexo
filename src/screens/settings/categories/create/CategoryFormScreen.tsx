@@ -1,12 +1,11 @@
 import { useCategoryMutation } from "@/hooks/useCategoryMutations";
 import { CreateCategoryStackParamList, HomeStackParamList } from "@/routes/types";
-import { Button, Container } from "@/shared/components";
+import { AddButton, Container } from "@/shared/components";
 import { TextField } from "@/shared/components/fields";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import { CommonActions, CompositeScreenProps } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { Plus } from "lucide-react-native";
 import { Controller, useForm } from "react-hook-form";
 import { ScrollView, Text } from "react-native";
 import z from "zod";
@@ -82,10 +81,8 @@ export default function CategoryFormScreen({ navigation }: CategoryFormScreenPro
                     )}
                 />
 
-                <Button 
+                <AddButton 
                     text="Criar categoria"
-                    icon={<Plus size={20} color={'white'} />}
-                    loading={isPending}
                     onPress={handleSubmit(onSubmit)}
                 />
             </ScrollView>

@@ -69,7 +69,7 @@ export default function ExpensesPreviewScreen({ navigation }: ExpensesPreviewPro
 
             <Button
                 text="Gerar contas"
-                icon={<Receipt size={20} color="#FFFFFF" />}
+                leftIcon={Receipt}
                 loading={isPending}
                 onPress={handleGenerateExpenses}
             />

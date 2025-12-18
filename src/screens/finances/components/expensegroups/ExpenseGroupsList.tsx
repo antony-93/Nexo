@@ -15,12 +15,12 @@ export default function ExpenseGroupsList() {
     return (
         <FlatList
             scrollEnabled={false}
-            contentContainerClassName="gap-5 mb-2"
+            contentContainerClassName="gap-5 mb-2 mt-4"
             data={data?.content}
             renderItem={({ item }) => (
                 <ExpenseGroupCard
                     expenseGroup={item}
-                    onPress={() => navigation.navigate('ExpenseByGroupList', { groupId: item.id })}
+                    onPress={() => navigation.navigate('ExpenseByGroupList', { expenseGroupId: item.id })}
                 />
             )}
         />

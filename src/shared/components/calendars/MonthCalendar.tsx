@@ -7,7 +7,7 @@ import Animated, {
     useSharedValue,
     withTiming
 } from "react-native-reanimated";
-import { Card } from "../Card";
+import { Card } from "../cards/Card";
 import { Container, ContainerProps } from "../Container";
 
 export type MonthCalendarProps = ContainerProps & {
@@ -118,7 +118,7 @@ function MonthCard({ label, selected, onPress }: MonthCardProps) {
     return (
         <TouchableOpacity
             onPress={onPress}
-            className="w-[30%] h-16 mb-1"
+            className="w-[30%] h-16 mb-2"
         >
             <Card className={cardCls}>
                 <Text className={textCls}>{label}</Text>

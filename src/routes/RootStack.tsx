@@ -1,3 +1,4 @@
+import { LoadExpensesQueryContextProvider } from '@/context/LoadExpensesQueryContext';
 import ExpensesByGroupListScreen from '@/screens/finances/expenses/list/ExpensesByGroupListScreen';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import CreateCategoryStack from './CreateCategoryStack';
@@ -30,8 +31,13 @@ export default function RootStack() {
 
             <Stack.Screen
                 name='ExpenseByGroupList'
-                component={ExpensesByGroupListScreen}
-            />
+            >
+                {(props) => (
+                    <LoadExpensesQueryContextProvider>
+                        <ExpensesByGroupListScreen {...props} />
+                    </LoadExpensesQueryContextProvider>
+                )}
+            </Stack.Screen>
         </Stack.Navigator>
     );
 }
